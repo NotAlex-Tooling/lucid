@@ -328,6 +328,7 @@ class ImageForensicsTool {
         });
 
         document.getElementById('resetBtn').addEventListener('click', () => this.reset());
+        document.getElementById('themeToggle').addEventListener('click', () => this.toggleTheme());
         document.getElementById('exportBtn').addEventListener('click', () => this.exportImage());
         document.getElementById('copyBtn').addEventListener('click', () => this.copyImage());
         document.getElementById('pasteBtn').addEventListener('click', () => this.pasteImage());
@@ -2297,6 +2298,20 @@ ${exifRows ? `<table><tr><th>Field</th><th>Value</th></tr>${gps}${exifRows}</tab
             section.querySelector('img').src = thumbUrl;
             el.appendChild(section);
         } catch {}
+    }
+
+    toggleTheme() {
+        // Switches between light and dark themes and persists the choice
+        const root = document.documentElement;
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        root.classList.add('theme-anim');
+        root.setAttribute('data-theme', next);
+        window.clearTimeout(this._themeAnimTimer);
+        this._themeAnimTimer = window.setTimeout(() => root.classList.remove('theme-anim'), 360);
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', next === 'light' ? '#ffffff' : '#0a0a0a');
+        try { localStorage.setItem('lucid-theme', next); } catch (e) {}
+        showToast(next === 'light' ? 'Light theme' : 'Dark theme');
     }
 
     formatFileSize(bytes) {

@@ -55,3 +55,9 @@ Load an image by file upload, clipboard paste (`Ctrl+V`), a URL, or by dragging 
 - A minimum screen width of 1024px is recommended.
 - Supported formats: JPG, PNG, GIF, BMP, WebP, TIFF, HEIC/HEIF.
 - All image data stays on your machine and is never sent to a server.
+
+---
+
+<div align="center">
+Tooling by <a href="https://github.com/NotAlex-Tooling/">NotAlex</a>
+</div>
